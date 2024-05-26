@@ -7,9 +7,6 @@ const port = 3000;
 app.set('view engine', 'hbs');
 app.engine('hbs', exphbs.engine({
     extname: 'hbs',
-    defaultLayout: 'main',
-    layoutsDir: __dirname + 'views/layouts',
-    partialsDir: __dirname + 'views/partials',
 }));
 
 // Templates directory
@@ -17,7 +14,7 @@ app.set('views', __dirname + '/views');
 
 // Static Files 
 app.use(express.static('assets'));
-app.use('/bootstrap', express.static('/node_modules/bootstrap/dist'));
+app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 const products = ['banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate'];
 
