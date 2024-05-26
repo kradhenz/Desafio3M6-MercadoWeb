@@ -6,7 +6,10 @@ const port = 3000;
 // Templates engine
 app.set('view engine', 'hbs');
 app.engine('hbs', exphbs.engine({
-    extname: 'hbs'
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: __dirname + 'views/layouts',
+    partialsDir: __dirname + 'views/partials',
 }));
 
 // Templates directory
@@ -14,25 +17,21 @@ app.set('views', __dirname + '/views');
 
 // Static Files 
 app.use(express.static('assets'));
-app.use('/bootstrap', express.static('/node_modules/bootstrap/dist/css')); 
+app.use('/bootstrap', express.static('/node_modules/bootstrap/dist'));
 
-// Routes
+const products = ['banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate'];
+
+// Main route
 app.get('/', (req, res) => {
-    res.render('home', {
-        products: ['banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate']
-    });
+    res.render('home', {products});
 });
 
-
-
-
-
-
-
+// Undefined route managament
 app.get('*', (req, res) => {
     res.send('<center><h1>This page does not exist...👻</h1></center>');
 });
 
+// Express server
 app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
 });
